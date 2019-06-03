@@ -11,5 +11,8 @@ namespace RcepcionApi.EntityModels
         [Key]
         public int Id { get; set; }
         public string Tipo { get; set; }
+        public DateTimeOffset FechaRegistro { get; set; }
+        public virtual List<LlamadaEntity> LlamadaEntities { get; set; }
+
     }
 }

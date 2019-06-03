@@ -10,7 +10,7 @@ using RcepcionApi.Data;
 namespace RcepcionApi.Migrations
 {
     [DbContext(typeof(RecepcionDbContext))]
-    [Migration("20190603155730_Inicial")]
+    [Migration("20190603234801_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,9 @@ namespace RcepcionApi.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Name")
                         .HasMaxLength(256);
 
@@ -43,6 +46,8 @@ namespace RcepcionApi.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -74,6 +79,9 @@ namespace RcepcionApi.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -114,6 +122,8 @@ namespace RcepcionApi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -138,9 +148,11 @@ namespace RcepcionApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -171,15 +183,168 @@ namespace RcepcionApi.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictApplication", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ClientSecret");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ConsentType");
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("Permissions");
+
+                    b.Property<string>("PostLogoutRedirectUris");
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("RedirectUris");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId")
+                        .IsUnique();
+
+                    b.ToTable("OpenIddictApplications");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictAuthorization", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("Scopes");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId", "Status", "Subject", "Type");
+
+                    b.ToTable("OpenIddictAuthorizations");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictScope", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("Resources");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("OpenIddictScopes");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictToken", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("AuthorizationId");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(50);
+
+                    b.Property<DateTimeOffset?>("CreationDate");
+
+                    b.Property<DateTimeOffset?>("ExpirationDate");
+
+                    b.Property<string>("Payload");
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("ReferenceId")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorizationId");
+
+                    b.HasIndex("ReferenceId")
+                        .IsUnique()
+                        .HasFilter("[ReferenceId] IS NOT NULL");
+
+                    b.HasIndex("ApplicationId", "Status", "Subject", "Type");
+
+                    b.ToTable("OpenIddictTokens");
                 });
 
             modelBuilder.Entity("RcepcionApi.EntityModels.LlamadaEntity", b =>
@@ -190,9 +355,9 @@ namespace RcepcionApi.Migrations
 
                     b.Property<string>("Mensaje");
 
-                    b.Property<int?>("TipoLlamadaEntityId");
+                    b.Property<int>("TipoLlamadaEntityId");
 
-                    b.Property<int?>("TipoPersonaEntityId");
+                    b.Property<int>("TipoPersonaEntityId");
 
                     b.HasKey("Id");
 
@@ -219,7 +384,7 @@ namespace RcepcionApi.Migrations
 
                     b.Property<string>("TelefonoCelular");
 
-                    b.Property<int?>("TipoPersonaEntityId");
+                    b.Property<int>("TipoPersonaEntityId");
 
                     b.HasKey("Id");
 
@@ -234,6 +399,8 @@ namespace RcepcionApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTimeOffset>("FechaRegistro");
+
                     b.Property<string>("Tipo");
 
                     b.HasKey("Id");
@@ -247,11 +414,50 @@ namespace RcepcionApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTimeOffset>("FechaRegistro");
+
                     b.Property<string>("Tipo");
 
                     b.HasKey("Id");
 
                     b.ToTable("TipoPersona");
+                });
+
+            modelBuilder.Entity("RcepcionApi.EntityModels.UsuarioRoleEntity", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+
+                    b.ToTable("UsuarioRoleEntity");
+
+                    b.HasDiscriminator().HasValue("UsuarioRoleEntity");
+
+                    b.HasData(
+                        new { Id = "0788808b-3980-4913-a487-a4f4cdca63aa", ConcurrencyStamp = "5d6705f2-7000-4331-b809-c1f8bf115f7a", Name = "Admininistrador", NormalizedName = "ADMINISTRADOR" },
+                        new { Id = "91a46680-6b70-4b38-8df9-307a674a224c", ConcurrencyStamp = "beedfcab-b1d7-4ae5-a761-9a438f7d9915", Name = "Usuario", NormalizedName = "USUARIO" }
+                    );
+                });
+
+            modelBuilder.Entity("RcepcionApi.EntityModels.UsuarioEntity", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Apellidos")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<DateTimeOffset>("FechaRegistro");
+
+                    b.Property<string>("Nombres")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<string>("Telefono")
+                        .HasMaxLength(12);
+
+                    b.ToTable("UsuarioEntity");
+
+                    b.HasDiscriminator().HasValue("UsuarioEntity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -299,22 +505,43 @@ namespace RcepcionApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictAuthorization", b =>
+                {
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictApplication", "Application")
+                        .WithMany("Authorizations")
+                        .HasForeignKey("ApplicationId");
+                });
+
+            modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictToken", b =>
+                {
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictApplication", "Application")
+                        .WithMany("Tokens")
+                        .HasForeignKey("ApplicationId");
+
+                    b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictAuthorization", "Authorization")
+                        .WithMany("Tokens")
+                        .HasForeignKey("AuthorizationId");
+                });
+
             modelBuilder.Entity("RcepcionApi.EntityModels.LlamadaEntity", b =>
                 {
                     b.HasOne("RcepcionApi.EntityModels.TipoLlamadaEntity", "TipoLlamadaEntity")
-                        .WithMany()
-                        .HasForeignKey("TipoLlamadaEntityId");
+                        .WithMany("LlamadaEntities")
+                        .HasForeignKey("TipoLlamadaEntityId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("RcepcionApi.EntityModels.TipoPersonaEntity", "TipoPersonaEntity")
-                        .WithMany()
-                        .HasForeignKey("TipoPersonaEntityId");
+                        .WithMany("LlamadaEntities")
+                        .HasForeignKey("TipoPersonaEntityId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("RcepcionApi.EntityModels.PersonaEntity", b =>
                 {
                     b.HasOne("RcepcionApi.EntityModels.TipoPersonaEntity", "TipoPersonaEntity")
-                        .WithMany()
-                        .HasForeignKey("TipoPersonaEntityId");
+                        .WithMany("PersonaEntities")
+                        .HasForeignKey("TipoPersonaEntityId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

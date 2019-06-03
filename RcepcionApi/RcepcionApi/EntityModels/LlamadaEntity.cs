@@ -11,7 +11,9 @@ namespace RcepcionApi.EntityModels
         [Key]
         public int Id { get; set; }
         public string Mensaje { get; set; }
-        public TipoLlamadaEntity TipoLlamadaEntity { get; set; }
-        public TipoPersonaEntity TipoPersonaEntity { get; set; }
+        public int TipoLlamadaEntityId { get; set; }
+        public int TipoPersonaEntityId { get; set; }
+        public virtual TipoLlamadaEntity TipoLlamadaEntity { get; set; }
+        public virtual TipoPersonaEntity TipoPersonaEntity { get; set; }
     }
 }

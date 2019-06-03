@@ -15,6 +15,7 @@ namespace RcepcionApi.EntityModels
         public string TelefonoCelular { get; set; }
         public string NumeroFijo { get; set; }
         public string Direccion { get; set; }
-        public TipoPersonaEntity TipoPersonaEntity { get; set; }
+        public int TipoPersonaEntityId { get; set; }
+        public virtual TipoPersonaEntity TipoPersonaEntity { get; set; }
     }
 }

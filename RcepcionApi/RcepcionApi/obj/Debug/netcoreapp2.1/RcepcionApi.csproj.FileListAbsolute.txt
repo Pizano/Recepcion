@@ -1,0 +1,14 @@
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\bin\Debug\netcoreapp2.1\RcepcionApi.deps.json
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\bin\Debug\netcoreapp2.1\RcepcionApi.runtimeconfig.json
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\bin\Debug\netcoreapp2.1\RcepcionApi.runtimeconfig.dev.json
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\bin\Debug\netcoreapp2.1\RcepcionApi.dll
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\bin\Debug\netcoreapp2.1\RcepcionApi.pdb
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.csprojAssemblyReference.cache
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.csproj.CoreCompileInputs.cache
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.RazorAssemblyInfo.cache
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.RazorAssemblyInfo.cs
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.AssemblyInfoInputs.cache
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.AssemblyInfo.cs
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.RazorTargetAssemblyInfo.cache
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.dll
+C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.pdb

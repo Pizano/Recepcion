@@ -18,6 +18,7 @@ using Microsoft.Extensions.Options;
 using OpenIddict.Validation;
 using RcepcionApi.Data;
 using RcepcionApi.EntityModels;
+using RcepcionApi.Services;
 
 namespace RcepcionApi
 {
@@ -39,6 +40,8 @@ namespace RcepcionApi
                 .EnableSensitiveDataLogging(true).UseLazyLoadingProxies();
                 options.UseOpenIddict();
             });
+            services.AddScoped<IPersonaServices, PersonaServices>();
+            services.AddScoped<ILlamadasServices, LlamadaServices>();
 
 
 
@@ -94,17 +97,17 @@ namespace RcepcionApi
 
             services.AddCors();
 
-            // Swagger configuración
-            services.AddSwaggerGen(options => {
-                options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
-                {
-                    Title = "Trascender API",
-                    Description = "Pruebas documentación Swagger"
-                });
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
-                options.IncludeXmlComments(xmlPath);
-            });
+            //// Swagger configuración
+            //services.AddSwaggerGen(options => {
+            //    options.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
+            //    {
+            //        Title = "Trascender API",
+            //        Description = "Pruebas documentación Swagger"
+            //    });
+            //    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //    var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+            //    options.IncludeXmlComments(xmlPath);
+            //});
             // Swagger Configuracion
         }
 
@@ -136,10 +139,10 @@ namespace RcepcionApi
             app.UseHttpsRedirection();
             app.UseMvc();
             // app de swagger
-            app.UseSwagger();
-            app.UseSwaggerUI(options => {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Trascender");
-            });
+            //app.UseSwagger();
+            //app.UseSwaggerUI(options => {
+            //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Trascender");
+            //});
             // app de swager
         }
     }

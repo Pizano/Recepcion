@@ -42,6 +42,8 @@ namespace RcepcionApi
             });
             services.AddScoped<IPersonaServices, PersonaServices>();
             services.AddScoped<ILlamadasServices, LlamadaServices>();
+            services.AddScoped<ITipoLlamadasServices, TipoLlamadasServices>();
+            services.AddScoped<ITipoPersonaServices, TipoPersonaServices>();
 
 
 

@@ -11,4 +11,3 @@ C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netco
 C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.RazorTargetAssemblyInfo.cache
 C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.dll
 C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.pdb
-C:\Users\cepizano\source\repos\Recepcion\RcepcionApi\RcepcionApi\obj\Debug\netcoreapp2.1\RcepcionApi.csprojAssemblyReference.cache

@@ -14,11 +14,11 @@ namespace RcepcionApi.Controllers
     [Route("api/[controller]")]
     [Authorize(AuthenticationSchemes = OpenIddictValidationDefaults.AuthenticationScheme)]
     [ApiController]
-    public class TipoLlamadasController : ControllerBase
+    public class TipoPersonaController : ControllerBase
     {
-        private readonly ITipoLlamadasServices _services;
+        private readonly ITipoPersonaServices _services;
 
-        public TipoLlamadasController(ITipoLlamadasServices services)
+        public TipoPersonaController(ITipoPersonaServices services)
         {
             _services = services;
         }
@@ -37,13 +37,13 @@ namespace RcepcionApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TipoLLamadasViewModel model)
+        public async Task<IActionResult> Post(TipoPersonaViewModel model)
         {
             return await _services.Create(model);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] TipoLLamadasViewModel model)
+        public async Task<IActionResult> Put(TipoPersonaViewModel model)
         {
             return await _services.Update(model);
         }

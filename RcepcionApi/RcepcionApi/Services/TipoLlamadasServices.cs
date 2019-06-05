@@ -32,7 +32,7 @@ namespace RcepcionApi.Services
                 tipoLlamadaEntity.Tipo = model.Tipo;
                 await _context.TipoLlamadas.AddAsync(tipoLlamadaEntity);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Post","TipoLlamada", new { id = tipoLlamadaEntity.Id});
+                return RedirectToAction("GetById","TipoLlamadas", new { id = tipoLlamadaEntity.Id});
             }
             catch (Exception ex)
             {
@@ -83,7 +83,7 @@ namespace RcepcionApi.Services
                     return StatusCode(400, "Identificador nulo");
                 }
                 List<TipoLlamadaEntity> tipoLlamadaEntity = await _context.TipoLlamadas.Where(x => x.Id.Equals(id)).ToListAsync();
-                if (tipoLlamadaEntity == null)
+                if (tipoLlamadaEntity == null || tipoLlamadaEntity.Count().Equals(0))
                 {
                     return StatusCode(404, "No se encontro el tipo de llamada");
                 }
